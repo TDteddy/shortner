@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta property="og:image" content="open_graph1.jpg" />
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image:width" content="414">
+    <meta property="og:image:height" content="190">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <meta charset="UTF-8">
+    <title>UDM 도메인 단축</title>
+    <link href='font/font.css' rel='stylesheet' type='text/css'>
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    article {}
+
+    body {
+        font-family: 'Spoqa Han Sans Neo';
+        letter-spacing: -0.04em;
+        text-align: center;
+        background-color: #000000;
+    }
+    select option[value=""][disabled] {
+    display: none;
+    }
+    body::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+    }
+
+    body::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #5F5F5F; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+    }
+
+    body::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+    }
+
+    #btnnnn {
+        cursor: pointer;
+    }
+
+    @media all and (max-width: 1000px) {
+        .bom{
+            margin-top: 90px;
+            width: 30vw;
+            height: auto;
+        }
+        .workercode{
+            margin-top: 20px;
+            width: 75vw;
+            height: 13vw;
+            font-size: 4vw;
+            padding-left: 20px;
+            border: 1px solid #B2B2B2;
+            border-radius: 20px;
+        }
+        .workercodes{
+            margin-bottom: 50px;
+            margin-top: 15px;
+            width: 75vw;
+            height: 13vw;
+            font-size: 4vw;
+            padding-left: 20px;
+            border: 1px solid #B2B2B2;
+            border-radius: 20px;
+        }
+        .check{
+            width: 78vw;
+            height: 15vw;
+            background: #000000;
+            border-radius: 20px;
+            color: white;
+            font-size: 4vw;
+            margin-top: 15px;
+        }
+        .expl{
+            font-size: 3vw;
+            margin-top: 10px;
+            color: #FFD2D2;
+            font-style: normal;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 12vw;
+            line-height: 120px;
+            /* identical to box height, or 100% */
+
+            text-align: center;
+
+            color: #000000;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        article {
+            margin-top: 150px;
+            width: 90vw;
+            background-color: #FFFFFF;
+            display: inline-block;
+            border-radius: 20px;
+        }
+
+    }
+
+    @media all and (min-width: 1001px) {
+        .bom{
+            margin-top: 50px;
+            width: 150px;
+            height: auto;
+        }
+        .workercode{
+            margin-top: 10px;
+            width: 400px;
+            height: 60px;
+            font-size: 20px;
+            padding-left: 20px;
+            border: 1px solid #B2B2B2;
+            border-radius: 20px;
+        }
+        .workercodes{
+            margin-top: 15px;
+            margin-bottom: 50px;
+            width: 400px;
+            height: 60px;
+            font-size: 20px;
+            padding-left: 20px;
+            border: 1px solid #B2B2B2;
+            border-radius: 20px;
+        }
+        .check{
+            width: 420px;
+            height: 60px; 
+            background: #000000;
+            border-radius: 20px;
+            color: white;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+        .expl{
+            margin-top: 10px;
+            color: #FFD2D2;
+            font-style: normal;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 45px;
+            line-height: 120px;
+            /* identical to box height, or 100% */
+
+            text-align: center;
+
+            color: #000000;
+        }
+
+        article {
+            margin-top: 150px;
+            width: 580px;
+            background-color: #FFFFFF;
+            display: inline-block;
+            border-radius: 20px;
+        }
+
+    }
+    </style>
+</head>
+
+<body>
+    <article>
+        <img class="bom" src="udmlogo.png">
+        <h1>UDM Short-Link Generator</h1>
+        <form id="fetchForm" autocomplete="off">
+            <input class="workercode" type="text" placeholder="단축할 URL을 입력해주세요" name="linkAddress" id="linkAddress" required/>
+            <input type="submit" class="check" value="생성하기" name="check"></input>
+        </form>
+        <input type="text" class="workercodes" placeholder="Short-Link" id="responseField" onclick="copyToClipboard()" readonly>
+    </article>
+    <p class="expl">UDM Short-Link Generator</p>
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("responseField");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("내용이 복사되었습니다");
+        }
+        document.getElementById('fetchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    let linkAddress = document.getElementById('linkAddress').value;
+    var check = /http(s)?:\/\/([a-z0-9\w-]+\.)+[a-z]{2,}(\/[\w .-]*)*/gi;
+    if(!check.test(linkAddress)) {
+        alert('올바른 URL을 입력해주세요');
+        return false;
+    }
+    else {
+        fetch(`http://s.udm.kr:8000/createlink/?link=${linkAddress}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();   
+        })
+        .then(json => {
+            // 응답에서 short_url 값을 추출하고 이를 input 필드에 설정합니다.
+            document.getElementById('responseField').value = json.short_url;
+        })
+        .catch(e => console.log('There was a problem with the fetch operation: ' + e.message));
+    }
+    
+});
+    </script>
+</body>
